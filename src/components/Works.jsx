@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Tilt from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -16,8 +16,22 @@ const ProjectCard = ({
   video_file,
   source_code_link,
 }) => {
+  const videoRef = useRef(null);
+
+  // Function to handle video playback on hover
+  const handleMouseEnter = () => {
+    videoRef.current.play();
+  };
+
+  const handleMouseLeave = () => {
+    videoRef.current.pause();
+  };
+
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+    <motion.div
+      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      className="transition-transform duration-300 hover:scale-105"
+    >
       <Tilt
         options={{
           max: 45,
@@ -26,15 +40,19 @@ const ProjectCard = ({
         }}
         className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full flex flex-col h-full'
       >
-        <div className='relative w-full h-[230px]'>
+        <div
+          className='relative w-full h-[230px]'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <video
+            ref={videoRef}
             src={video_file}
             className='w-full h-full object-cover rounded-2xl'
-            autoPlay
             loop
             muted
           />
-          
+
           <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
             <div
               onClick={() => window.open(source_code_link, "_blank")}
