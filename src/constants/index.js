@@ -193,7 +193,7 @@ const projects = [
       },
     ],
     video_file: video3,
-    source_code_link: "https://github.com/satishkumarmurugan/Predictive-Maintenance-using-ML",
+    source_code_link: "https://github.com/satishkumarmurugan/Predictive-Maintenance-using-Flash-deployed-using-AWS",
   },
 ];
 
